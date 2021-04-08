@@ -1,0 +1,64 @@
+{
+    "fold": "test", --> must be test
+    "topic": "relationship", --> remove
+    "dialogue": [
+        {
+            "emotion": "happiness", --> remove
+            "act": "inform", --> remove
+            "context": ["A1", "B" ,"A2"],
+            "text": "A2",
+            "responses": [
+                "that 's a wonderful way to celebrate this grand old library !",
+                "what do you need from me ?",
+                "that sounds fun !",
+                "where will it be held ?",
+                "ca n't believe it has been 100 years !"]
+        }, {
+            "emotion": "happiness",
+            "act": "inform",
+            "text": "That's a wonderful way to celebrate this grand old library !",
+            "responses": [
+                "i hoped you would be willing to brainstorm with me for party ideas .", 
+                "yes , it 's going to be a blast .", 
+                "there will be lots of cake .", 
+                "i expect many people to show up .", 
+                "yes , i hope to see you there !"]
+            }, {
+                "emotion": "happiness", 
+                "act": "directive", 
+                "text": "I hoped you would be willing to brainstorm with me for party ideas .", 
+                "responses": [
+                    "that is right up my alley . you say party and i 'm there .", 
+                    "sure ! i 'd be happy to help .", 
+                    "oh yeah . i have lots of ideas .", 
+                    "ok . when would you like to meet ?", 
+                    "yes . i think this will be exciting ."]
+            }, {
+                "emotion": "happiness",
+                "act": "commissive", 
+                "text": "That is right up my alley . You say party and I'm there .", 
+                "responses": [
+                    "perfect . it will be open to the public and we anticipate roughly about five to seven hundred people .", 
+                    "fantastic ! are you available tomorrow morning to start planning ?", 
+                    "i heard that about you !", 
+                    "that 's great ! i really need help planning .", 
+                    "ok ... \"party \" !"]
+                }, {
+                    "emotion": "happiness", 
+                    "act": "inform", 
+                    "text": "Perfect . It will be open to the public and we anticipate roughly about five to seven hundred people .", 
+                    "responses": [
+                        "will it be an all day event ?", 
+                        "oh , i do n't know a ton about parties that big .", 
+                        "i can get started on finding some ideas .",
+                        "are we allowed to serve alcohol ?", 
+                        "do people have to pay to get in or is it free ?"]
+                }, {
+                    "emotion": "no_emotion",
+                    "act": "question",
+                    "text": "Will it be an all day event ?",
+                    "responses": ["yes . and we checked with the city and we have permission to use the park adjacent to the library .", "it is a 5 hour event", "it is an all day event", "yes , that 's the plan", "i think so"]}, {"emotion": "no_emotion", "act": "inform", "text": "Yes . And we checked with the city and we have permission to use the park adjacent to the library .", "responses": ["that was quick thinking .", "have you figured out food yet ?", "what sort of music are you looking for ?", "are there going to be party games ?", "what types of people do you anticipate ?"]},
+                {
+                    "emotion": "no_emotion",
+                    "act": "inform",
+                    "text": "That was quick thinking ."}], "index": 934}
