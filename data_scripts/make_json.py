@@ -2,7 +2,7 @@ import os
 import re
 import json
 
-# Script to convert dialogue in convo_951 ~ convo_999 into one multiref.json files
+# Script to convert dialogue in convo_0 ~ convo_999 into one multiref.json files
 def read_convo():
     '''
     Reads all conversations and returns a DataFrame.

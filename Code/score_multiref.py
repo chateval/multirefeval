@@ -8,6 +8,7 @@ import argparse
 from collections import Counter
 import warnings
 warnings.filterwarnings("ignore")
+import time
 
 from nltk.translate.bleu_score import SmoothingFunction, sentence_bleu, corpus_bleu
 import nltk.translate.nist_score as nist_score
@@ -18,7 +19,6 @@ nlp = spacy.load('en')
 from nlgeval import NLGEval
 nlgeval = NLGEval(metrics_to_omit=['CIDEr']) 
 cc = SmoothingFunction()
-
 
 overlapped_dialogueindices = [5, 24, 28, 31, 38, 41, 45, 64, 74, 75, 81, 94, 105, 107, 115, 119, 124, 135, 145, 146, 152, 158, 184, 190, 194, 197, 200, 202, 203, 223, 229, 237, 240, 248, 255, 258, 262, 267, 274, 277, 292, 298, 301, 303, 311, 312, 318, 323, 335, 348, 353, 376, 395, 404, 410, 413, 432, 443, 444, 452, 454, 458, 463, 478, 498, 500, 503, 504, 516, 530, 532, 538, 556, 557, 567, 568, 569, 572, 575, 578, 581, 584, 585, 589, 600, 606, 610, 614, 630, 635, 636, 639, 640, 645, 647, 651, 654, 659, 661, 671, 675, 681, 682, 683, 692, 694, 698, 699, 700, 704, 705, 706, 714, 715, 716, 722, 725, 727, 731, 734, 735, 743, 745, 747, 752, 754, 755, 756, 764, 765, 770, 777, 787, 798, 802, 807, 809, 812, 813, 816, 820, 821, 825, 828, 834, 836, 840, 841, 842, 845, 846, 849, 854, 857, 859, 863, 864, 870, 873, 875, 878, 882, 883, 891, 892, 893, 894, 895, 899, 903, 904, 908, 909, 912, 916, 917, 927, 931, 932, 933, 936, 940, 942, 948, 950, 951, 953, 954, 955, 959, 961, 962, 966, 967, 968, 974, 979, 982, 986, 995, 996, 997, 998, 999]
 
@@ -138,13 +138,13 @@ def get_ref_hyp_pairs_json(multiref_data, predictions, prevgt_ref, mapping_json,
             break
         for u, utterance_data in enumerate(multiref_data[dialogue_id]['dialogue']):
             #skip the last utterance as it does not have a response
-            if u == len(multiref_data[dialogue_id]['dialogue'])-1:
-                break
+            # if u == len(multiref_data[dialogue_id]['dialogue'])-1:
+            #    break
             dialogue_utterance_id = str(dialogue_id) + '_' + str(u)
             references = utterance_data['responses']
             references = [clean_split_sentence(line) for line in references]
             if num_response>0:
-                references = references[:num_response]
+                references = references[:num_response] # User defined max # of reference
             line_number = mapping_json[dialogue_utterance_id]
             ## prediction file already cleaned and tokenised
             prediction = predictions[line_number-1]
@@ -496,17 +496,18 @@ def get_all_metrics(list_references, list_hypothesis):
     # get_corpus_bleu(list_references, list_hypothesis)
     # get_sentence_bleu(list_references, list_hypothesis)
     get_max_bleu(list_references, list_hypothesis)
-
+    # AssetionError refs/hyp not equal
     list_string_references, list_string_hypothesis = convert_tostring_lists(list_references, list_hypothesis)
     metrics_dict = nlgeval.compute_metrics(list_string_references, list_string_hypothesis)
     print_metrics_dict(metrics_dict)
 
 def main():
+    print(os.getcwd())
     parser = argparse.ArgumentParser()
-    parser.add_argument('--multiref_file', default='../multiref-dataset/multireftest.json')
-    parser.add_argument('--singleref_file', default='jsons/test.tgt')
-    parser.add_argument('--pred_file', default='')
-    parser.add_argument('--fold', default='jsons/test')
+    parser.add_argument('--multiref_file', default='./multiref-dataset/multireftest.json')
+    parser.add_argument('--singleref_file', default='./Code/jsons/test.tgt')
+    parser.add_argument('--pred_file', default='./Code/hredf.txt')
+    parser.add_argument('--fold', default='./Code/jsons/test')
     parser.add_argument("--remove_overlap", default=False, action="store_true" , help="Flag to remove overlap from dailydialog original trainset")
     parser.add_argument('--num_multi_response', default=5)
     args = parser.parse_args()
@@ -524,4 +525,6 @@ def main():
     get_metrics_frompremapped_prevgt(args)
 
 if __name__ == "__main__":
-    main()                
+    start_time = time.time()
+    main()
+    print("--- %s seconds ---" % (time.time() - start_time))
