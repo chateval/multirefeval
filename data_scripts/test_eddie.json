@@ -1,0 +1,28 @@
+{
+    "fold": "test",
+    "dialogue": [
+        {
+            "context": [
+                "Where should my hands be on the steering wheel?",
+                "Your hands should be on 10 and 2.", 
+                "10 and 2? What do you mean?"
+            ],
+            "text": "10 and 2? What do you mean?",
+            "responses": [
+                "Like the numbers on the clock.",
+                "Imagine a clock face, that 10 and 2.", 
+                "Right there and right there.", 
+                "Imagine your steering wheel as a clock", 
+                "Here let me show you.", 
+                "Think of a clock face and put your hands where the 10 and 2 are.", 
+                "You've never heard that expression before?", 
+                "Look at what my hands are doing.", 
+                "It's just a way to remember where to put your hands, where the 10 and 2 are on a clock.", 
+                "Here, I'll show you.", 
+                "You've never heard of that before?", 
+                "Like this.", 
+                "You put one hand there and the other hand there."]
+        }
+    ],
+    "index": 198
+}
