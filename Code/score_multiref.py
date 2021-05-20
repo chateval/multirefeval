@@ -133,8 +133,8 @@ def get_ref_hyp_pairs_json(multiref_data, predictions, prevgt_ref, mapping_json,
             break
         for u, utterance_data in enumerate(multiref_data[dialogue_id]['dialogue']):
             #skip the last utterance as it does not have a response
-            if u == len(multiref_data[dialogue_id]['dialogue'])-1:
-                break
+            #if u == len(multiref_data[dialogue_id]['dialogue'])-1:
+            #    break
             dialogue_utterance_id = str(dialogue_id) + '_' + str(u)
             references = utterance_data['responses']
             references = [clean_split_sentence(line) for line in references]
