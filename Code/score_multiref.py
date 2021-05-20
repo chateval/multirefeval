@@ -14,7 +14,7 @@ import nltk.translate.nist_score as nist_score
 from sumeval.metrics.rouge import RougeCalculator
 rouge = RougeCalculator(stopwords=True, lang="en")
 import spacy
-nlp = spacy.load('en')
+nlp = spacy.load('en_core_web_sm')
 from nlgeval import NLGEval
 nlgeval = NLGEval(metrics_to_omit=['CIDEr']) 
 cc = SmoothingFunction()
