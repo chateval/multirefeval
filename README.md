@@ -1,3 +1,13 @@
+
+# Seunggun's Notes
+
+Data & script adjusted for ESL3-turn
+
+## Human Output
+Human output is stored under `data_scripts/data/human_output.txt`, which was made by randomly selecting a response from `multireftest.json` for each prompt. The script is `data_scripts/make_human_output.py`
+
+---
+
 # Forked
 Changed dataset to ESL data | implemented tokenization for sentences
 
