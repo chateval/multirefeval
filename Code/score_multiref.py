@@ -480,7 +480,7 @@ def get_all_metrics(list_references, list_hypothesis):
     metrics_dict = nlgeval.compute_metrics(list_string_references, list_string_hypothesis)
     print_metrics_dict(metrics_dict)
 
-def main():
+def execute_multirefeval():
     parser = argparse.ArgumentParser()
     parser.add_argument('--multiref_file', default='../multiref-dataset/multireftest.json')
     parser.add_argument('--singleref_file', default='jsons/test.tgt')
@@ -499,4 +499,4 @@ def main():
     get_metrics_frompremapped_prevgt(args)
 
 if __name__ == "__main__":
-    main()                
+    execute_multirefeval()                
