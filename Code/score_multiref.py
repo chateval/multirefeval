@@ -493,7 +493,8 @@ def print_metrics_dict(metrics_dict):
 
 def get_all_metrics(list_references, list_hypothesis):
 
-    # get_corpus_bleu(list_references, list_hypothesis)
+    # get_corpus_bleu(list_references, list_hypo
+    # thesis)
     # get_sentence_bleu(list_references, list_hypothesis)
     get_max_bleu(list_references, list_hypothesis)
     # AssetionError refs/hyp not equal
