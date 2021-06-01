@@ -1,8 +1,6 @@
 
 .env
 .vscode
-upload_prompts.py
-upload_references.py
 temp_data
 
 # dependencies
