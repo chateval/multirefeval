@@ -19,6 +19,8 @@ from nlgeval import NLGEval
 nlgeval = NLGEval(metrics_to_omit=['CIDEr']) 
 cc = SmoothingFunction()
 
+from multiref_db import query_db_multiref
+
 def clean_tokenize_sentence(data):
     data = data.lower().strip()#.replace(" \' ", "\'")
     spacy_token = nlp(data)
@@ -54,23 +56,23 @@ def read_duid_mapping_json(json_file):
     with open(json_file+'.json') as json_file:  
         data = json.load(json_file)
     
-    return data
+    return data  # {'0_0': 1, '1_0': 2, ..., '999_0': 1000}
 
 def read_predicted_data(pred_file):
     with open(pred_file) as fp:
         lines = fp.readlines()
     #shuffle(lines) # to test generic outputs
-    lines = [clean_tokenize_sentence(line) for line in lines]
+    lines = [clean_tokenize_sentence(line) for line in lines]  # Lines - ['textextext.\n', ... , 'textextext.\n'], from hredf.txt
     
-    return lines
+    return lines  # [['tokenized', 'sentences']]  - no \n
 
 def read_predicted_data_asref(pred_file):
     with open(pred_file) as fp:
         lines = fp.readlines()
     #shuffle(lines) # to test generic outputs
-    lines = [[clean_tokenize_sentence(line)] for line in lines]
+    lines = [[clean_tokenize_sentence(line)] for line in lines]  # lines - ['_go textextext _eos\n', '_go textextext _eos\n']  - no punctuation
     
-    return lines
+    return lines  # [['tokenized','sentences']] - no punctuation / _go / _eos
 
 
 def read_multiref_data(file_name):
@@ -394,12 +396,13 @@ def get_metrics_from_multirefasmodel_prevgt(args):
 
 def get_metrics_multiref_frommapping(args):
     print("Metrics with Multi-ref ground truth")
-    multiref_data = load_json_file(args.multiref_file)
-    predictions = read_predicted_data(args.pred_file)
-    prevgt_ref = read_predicted_data_asref(args.singleref_file)
+    # multiref_data = load_json_file(args.multiref_file)
+    # predictions = read_predicted_data(args.pred_file)
+    # prevgt_ref = read_predicted_data_asref(args.singleref_file)
 
-    # mapping each line in test file to correct contextid
-    mapping_json = read_duid_mapping_json(args.fold+ '_duid_mapping')
+    # # mapping each line in test file to correct contextid
+    # mapping_json = read_duid_mapping_json(args.fold+ '_duid_mapping')
+    multiref_data, predictions, prevgt_ref, mapping_json = query_db_multiref
     print('reading files complete')
     list_references, list_hypothesis, list_prev_gt = get_ref_hyp_pairs_json(multiref_data, predictions, prevgt_ref, mapping_json, num_response = args.num_multi_response)
     get_all_metrics(list_references, list_hypothesis)
@@ -480,7 +483,7 @@ def get_all_metrics(list_references, list_hypothesis):
     metrics_dict = nlgeval.compute_metrics(list_string_references, list_string_hypothesis)
     print_metrics_dict(metrics_dict)
 
-def execute_multirefeval():
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--multiref_file', default='../multiref-dataset/multireftest.json')
     parser.add_argument('--singleref_file', default='jsons/test.tgt')
@@ -498,5 +501,10 @@ def execute_multirefeval():
     ## test using single ref
     get_metrics_frompremapped_prevgt(args)
 
+
+
+
 if __name__ == "__main__":
-    execute_multirefeval()                
+
+    print('hello my name is LMAO')
+    main()                
