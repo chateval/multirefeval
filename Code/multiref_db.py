@@ -89,17 +89,13 @@ def query_db_multiref():
         except IndexError:
             missing_responses.append(prompt_id)
 
-    duid_json = {}
+    mapping_json = {}
 
     for i in range(idx):
-        duid_json[f'{i}_0'] = i
-
-    print(missing_responses)
-    print(duid_json)
+        mapping_json[f'{i}_0'] = i
 
 
-
-    return multiref_data, predictions, prevgt_ref, duid_json
+    return multiref_data, predictions, prevgt_ref, mapping_json
          # multireftest.json | test.tgt | hredf.txt | jsons/test_duid_mapping
 
 
