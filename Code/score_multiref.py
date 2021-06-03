@@ -402,7 +402,7 @@ def get_metrics_multiref_frommapping(args):
 
     # # mapping each line in test file to correct contextid
     # mapping_json = read_duid_mapping_json(args.fold+ '_duid_mapping')
-    multiref_data, predictions, prevgt_ref, mapping_json = query_db_multiref
+    multiref_data, predictions, prevgt_ref, mapping_json = query_db_multiref()
     print('reading files complete')
     list_references, list_hypothesis, list_prev_gt = get_ref_hyp_pairs_json(multiref_data, predictions, prevgt_ref, mapping_json, num_response = args.num_multi_response)
     get_all_metrics(list_references, list_hypothesis)
@@ -506,5 +506,4 @@ def main():
 
 if __name__ == "__main__":
 
-    print('hello my name is LMAO')
     main()                
