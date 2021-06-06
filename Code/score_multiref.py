@@ -372,9 +372,11 @@ def get_metrics_multiref_frompremapped(args):
 
 def get_metrics_frompremapped_prevgt(args):
     print("\n-Metrics with previous ground truth-")
-    list_references = read_predicted_data(args.singleref_file)
-    list_hypothesis = read_predicted_data(args.pred_file)
-    
+    #list_references = read_predicted_data(args.singleref_file)
+    #list_hypothesis = read_predicted_data(args.pred_file)
+
+    _, list_hypothesis, list_references, __ = query_db_multiref()
+
     list_references_listfied = [[ref] for ref in list_references]
 
     # pdb.set_trace()
