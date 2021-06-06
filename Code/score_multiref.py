@@ -503,7 +503,7 @@ def main():
     # get_metrics_multiref_frompremapped(args)
     print('******Testing model*******')
     # ## test using mutli ref
-    get_metrics_multiref_frommapping(args)
+    #get_metrics_multiref_frommapping(args)
 
     ## test using single ref
     get_metrics_frompremapped_prevgt(args)
