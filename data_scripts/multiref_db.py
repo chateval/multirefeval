@@ -47,7 +47,7 @@ def query_db_multiref():
         prompts_set[prompt_id]['responses'].append(text)
 
     for prompt_id in prompts_set.keys():
-        
+        print('lmao')
 
     return multiref_data, predictions, prevgt_ref, mapping_json
          # multireftest.json | test.tgt | hredf.txt | jsons/test_duid_mapping
