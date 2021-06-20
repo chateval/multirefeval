@@ -377,10 +377,10 @@ def get_metrics_frompremapped_prevgt(args):
 
     _, list_hypothesis, list_references, __ = query_db_multiref()
 
-    list_references_listfied = [[ref] for ref in list_references]
+    #list_references_listfied = [[ref] for ref in list_references]
 
     # pdb.set_trace()
-    get_all_metrics(list_references_listfied, list_hypothesis)
+    get_all_metrics(list_references, list_hypothesis)
 
     return list_references, list_hypothesis
 
@@ -500,10 +500,10 @@ def main():
     args = parser.parse_args()
     
     ''''''
-    # get_metrics_multiref_frompremapped(args)
+    get_metrics_multiref_frompremapped(args)
     print('******Testing model*******')
     # ## test using mutli ref
-    #get_metrics_multiref_frommapping(args)
+    get_metrics_multiref_frommapping(args)
 
     ## test using single ref
     get_metrics_frompremapped_prevgt(args)
