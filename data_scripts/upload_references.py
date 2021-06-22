@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import json
+from collections import defaultdict
 
 import pandas as pd
 import pymysql
@@ -26,25 +27,26 @@ with db:
         for (prompt_id, prompt_text) in existing_prompts_db:
             existing_prompts[prompt_text] = prompt_id
 
-        local_prompts = []
-
+        local_prompts = defaultdict(list)
 
         # Extract references from .json file
-        path_f = "../multiref-dataset/multireftest.json"
+        path_f = "./multiref-dataset/multireftest.json"
         with open(path_f) as file:
             for line in file:
-                local_prompts.append(json.loads(line))
+                j = json.loads(line)
+                prompt = tuple(j['dialogue'][0]['context'])  # Key for the local_prompt dictionary
+                references = j['dialogue'][0]['responses']
+                local_prompts[prompt].extend(references)  # If multiple jsons share the same prompt, merge references into a single set
 
         reference_id = 0
 
         # Insert references for each prompt
         for prompt in local_prompts:
-            context = prompt['dialogue'][0]['context']
-            prompt_text = "A " + context[0] + "\nB  " + context[1] + "\nA  " + context[2]
+            prompt_text = "A " + prompt[0] + "\nB  " + prompt[1] + "\nA  " + prompt[2]
 
             prompt_id = existing_prompts[prompt_text]
 
-            references = prompt['dialogue'][0]['responses']
+            references = local_prompts[prompt]
             reference_no = 0
 
             for reference in references:
@@ -54,7 +56,8 @@ with db:
 
                 reference_no += 1
                 reference_id += 1
-            
+            print(f'finshed reference #{reference_no}')
+
     db.commit()
 
 
